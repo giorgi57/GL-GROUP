@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GL GROUP</title>
+    <link rel="stylesheet" href="css/style.css"> 
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-image-container">
+                    <img src="images/logo.jpg" alt="GL GROUP" class="logo-img">
+                </div>
+                <span class="logo-text">GL<span style="color: #764ba2;">GROUP</span></span>
+            </a>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="#" class="nav-link active" onclick="filterCategory('all')" data-category="all" data-translate="all">ყველა</a>
+                <a href="#" class="nav-link" onclick="filterCategory('cars')" data-category="cars" data-translate="cars">🚗 ავტომობილები</a>
+                <a href="#" class="nav-link" onclick="filterCategory('houses')" data-category="houses" data-translate="houses">🏡 სახლები</a>
+                <a href="#" class="nav-link" onclick="filterCategory('land')" data-category="land" data-translate="land">🌾 მიწის ნაკვეთები</a>
+                <a href="#" class="nav-link" onclick="filterCategory('office')" data-category="office" data-translate="office">🏢 საოფისე</a>
+            </div>
+
+            <div class="nav-actions">
+                <div class="language-selector">
+                    <button class="lang-btn" onclick="toggleLanguageMenu()">
+                        <span id="currentLang">🇬🇪 ქარ</span>
+                    </button>
+                    <div class="language-menu" id="languageMenu">
+                        <button onclick="changeLanguage('ka')">🇬🇪 ქართული</button>
+                        <button onclick="changeLanguage('en')">🇬🇧 English</button>
+                        <button onclick="changeLanguage('ru')">🇷🇺 Русский</button>
+                    </div>
+                </div>
+
+                <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
+                    <span class="theme-icon">🌙</span>
+                </button>
+
+                <button class="admin-btn" id="loginBtn" onclick="showLoginModal()">
+                    <span>👤</span> <span data-translate="admin">ადმინი</span>
+                </button>
+                <button class="logout-btn" id="logoutBtn" style="display: none;" onclick="logout()" data-translate="logout">გასვლა</button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title" data-translate="heroTitle">იპოვე შენი სამომავლო სახლი</h1>
+            <p class="hero-subtitle" data-translate="heroSubtitle">ავტომობილები, სახლები, მიწის ნაკვეთები და საოფისე ფართები</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div id="adminPanel" style="display: none;">
+            <div class="admin-panel">
+                <h2>📊 <span data-translate="adminPanel">ადმინისტრატორის პანელი</span></h2>
+                <button class="admin-btn" onclick="showAddPostModal()">+ <span data-translate="newAd">ახალი განცხადება</span></button>
+            </div>
+        </div>
+
+        <div class="filter-info" id="filterInfo">
+            <h2 data-translate="allAds">ყველა განცხადება</h2>
+            <p id="filterCount"></p>
+        </div>
+
+        <div class="posts-grid" id="postsContainer"></div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>GL GROUP</h3>
+                <p>თქვენი სანდო პარტნიორი უძრავი ქონების ბაზარზე.</p>
+                <div class="footer-socials">
+                    <a href="#"><span class="social-icon">📘</span></a>
+                    <a href="#"><span class="social-icon">📸</span></a>
+                    <a href="#"><span class="social-icon">🐦</span></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>საკონტაქტო ინფორმაცია</h4>
+                <p>📍 ქ. თბილისი, პეტრიაშვილის ქ. #1</p>
+                <p>📍 ქ. ბათუმი, პეტრიაშვილის ქ. #1</p>
+                <p>📍 ქ. ქუთაისი, პეტრიაშვილის ქ. #1</p>
+                <p>📞 +995 555 12 34 56</p>
+                <p>📧 info@estatepro.ge</p>
+            </div>
+            <div class="footer-column">
+                <h4>ბმულები</h4>
+                <a href="#" onclick="filterCategory('cars')">ავტომობილები</a>
+                <a href="#" onclick="filterCategory('houses')">სახლები</a>
+                <a href="#" onclick="filterCategory('land')">მიწის ნაკვეთები</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 GL GROUP. ყველა უფლება დაცულია.</p>
+        </div>
+    </footer>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>🔐 <span data-translate="authorization">ავტორიზაცია</span></h2>
+            <div class="form-group">
+                <label data-translate="password">პაროლი:</label>
+                <input type="password" id="passwordInput" placeholder="შეიყვანეთ პაროლი">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="login()" data-translate="login">შესვლა</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('loginModal')" data-translate="cancel">გაუქმება</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="modal-close" onclick="closeModal('postModal')">&times;</span>
+            <h2 id="postFormTitle" data-translate="addNewAd">ახალი განცხადების დამატება</h2>
+            
+            <form id="postForm" onsubmit="addPost(event)"> 
+                <div class="form-group">
+                    <label data-translate="category">კატეგორია:</label>
+                    <select id="postCategory" class="form-select">
+                        <option value="cars" data-translate="cars">🚗 ავტომობილები</option>
+                        <option value="houses" data-translate="houses">🏡 სახლები</option>
+                        <option value="land" data-translate="land">🌾 მიწის ნაკვეთები</option>
+                        <option value="office" data-translate="office">🏢 საოფისე</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label data-translate="title">სათაური:</label>
+                    <input type="text" id="postTitle" placeholder="მაგ: 3 ოთახიანი ბინა ვაკეში">
+                </div>
+
+                <div class="form-group">
+                    <label data-translate="price">ფასი (₾):</label>
+                    <input type="number" id="postPrice" placeholder="მაგ: 150000">
+                </div>
+
+                <div class="form-group">
+                    <label data-translate="description">აღწერა:</label>
+                    <textarea id="postText" placeholder="დეტალური აღწერა..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <span data-translate="photos">ფოტოები</span> 
+                        <span class="photo-counter" id="photoCounter">0/10</span>
+                    </label>
+                    <input type="file" id="postImages" accept="image/*" multiple onchange="handleImageSelect(event)" class="file-input">
+                    <p class="help-text" data-translate="maxPhotos">მაქსიმუმ 10 ფოტო</p>
+                    <div class="images-preview-grid" id="selectedImagesContainer"></div> 
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary" data-translate="save">შენახვა</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('postModal')" data-translate="cancel">გაუქმება</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="galleryModal" class="modal" onclick="closeGallery()">
+        <span class="gallery-close">&times;</span>
+        <div class="gallery-content">
+            <button class="gallery-prev" onclick="event.stopPropagation(); changeGalleryImage(-1)">&#10094;</button>
+            <img id="galleryImage" class="gallery-image">
+            <button class="gallery-next" onclick="event.stopPropagation(); changeGalleryImage(1)">&#10095;</button>
+            <div class="gallery-counter" id="galleryCounter"></div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
