@@ -107,6 +107,7 @@ header {
     display: block;
 }
 
+
 .logo:hover {
     opacity: 0.8;
 }
@@ -790,6 +791,8 @@ footer {
 .detail-info {
     flex: 1.5;
     padding-top: 5px;
+    /* --- შესწორება 1: Flexbox-ის შეკუმშვისთვის --- */
+    min-width: 0; 
 }
 
 .main-image-container {
@@ -905,6 +908,11 @@ footer {
     background-color: var(--primary-hover);
 }
 
+/* --- შესწორება 2: მთლიან სექციას ვუმალავთ გადინებას --- */
+.detail-section {
+    overflow: hidden; 
+}
+
 .detail-section h3 {
     font-size: 1.2rem;
     color: var(--primary-color);
@@ -916,6 +924,9 @@ footer {
 .detail-section p {
     color: var(--text-color);
     white-space: pre-wrap; 
+    /* --- შესწორება 3: გრძელი სიტყვების გაყოფა --- */
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
 }
 
 /* Specs Grid */
