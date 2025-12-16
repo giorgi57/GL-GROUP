@@ -306,6 +306,36 @@
         <div class="gallery-counter" id="galleryCounter"></div>
     </div>
 
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script> 
+
+    <script>
+        // ----------------------------------------------------------------------------------
+        // 🔥🔥 საბოლოო Firebase კონფიგურაცია 🔥🔥
+        // ----------------------------------------------------------------------------------
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyAjPdiWM4UapprE1oI-TScujLaR3kd2aN4",
+            authDomain: "gl-group-53631.firebaseapp.com",
+            projectId: "gl-group-53631",
+            storageBucket: "gl-group-53631.firebasestorage.app",
+            messagingSenderId: "473915719046",
+            appId: "1:473915719046:web:4a1965cc8d5b1e18498007"
+        };
+
+        // Firebase სერვისების ინიციალიზაცია
+        firebase.initializeApp(firebaseConfig);
+        
+        // გლობალური ცვლადები, რომლებსაც გამოიყენებს script.js
+        const storage = firebase.storage(); 
+        const db = firebase.firestore();     
+        
+        console.log("Firebase Connection: FINALIZED and configured."); 
+        // ----------------------------------------------------------------------------------
+    </script>
+    
     <script src="js/script.js"></script>
 </body>
 </html>
