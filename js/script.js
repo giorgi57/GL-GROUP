@@ -93,7 +93,8 @@ async function uploadImageToFirebase(file) {
         
         console.log(`Uploading file: ${uniqueName}`);
         
-        const uploadTask = storageRef.put(file);
+        // ✅ ჩასწორება: MIME Type-ის დამატება ატვირთვას უფრო სტაბილურს ხდის CORS-ის შემთხვევაში
+        const uploadTask = storageRef.put(file, { contentType: file.type });
         
         // ლოდინი ატვირთვის დასრულებამდე
         await uploadTask; 
@@ -105,7 +106,8 @@ async function uploadImageToFirebase(file) {
         console.error("FIREBASE STORAGE ERROR:", error);
         
         if (error.code === 'storage/unauthorized') {
-            alert("შეცდომა: ატვირთვის ნებართვა არ არის. გთხოვთ, შეამოწმოთ **Firebase Storage Rules** და დააყენოთ 'allow read, write: if true;'");
+            // ✅ ჩასწორება: შეტყობინება Storage Rules-ისთვის
+            alert("შეცდომა: ატვირთვის ნებართვა არ არის. გთხოვთ, დარწმუნდეთ, რომ შესული ხართ ადმინით და Storage Rules სწორად არის გამოქვეყნებული (allow write: if request.auth != null;).");
         } else {
             alert(`შეცდომა: სურათი ვერ აიტვირთა სერვერზე. იხილეთ კონსოლი: ${error.message}`);
         }
