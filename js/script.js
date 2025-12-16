@@ -19,8 +19,8 @@ let detailImages = [];
 let currentDetailIndex = 0; 
 let currentDetailPost = null;
 
-// !!! შეცვალეთ ეს თქვენი პაროლით !!!
-const ADMIN_PASSWORD = 'glgroupadmin'; // იყენებს პირდაპირ ტექსტს შემოწმებისთვის
+// !!! ადმინის პაროლი !!!
+const ADMIN_PASSWORD = 'glgroupadmin'; 
 
 // --- TRANSLATION DATA ---
 const translations = {
@@ -56,7 +56,24 @@ const translations = {
         social: "სოციალური მედია",
         footerMission: "უძრავი ქონების და ავტომობილების საუკეთესო განცხადებები ერთ სივრცეში."
     },
-    // !!! დაამატეთ "en" და "ru" თარგმანები აქ !!!
+    'en': {
+         allAds: "🌟 All Listings",
+         cars: "🚗 Cars",
+         houses: "🏡 Houses",
+         land: "🌾 Land Plots",
+         office: "🏢 Office Spaces",
+         searchPlaceholder: "Search by title or description...",
+         // ... (სხვა თარგმანები)
+    },
+    'ru': {
+         allAds: "🌟 Все объявления",
+         cars: "🚗 Автомобили",
+         houses: "🏡 Дома",
+         land: "🌾 Земельные участки",
+         office: "🏢 Офисы",
+         searchPlaceholder: "Искать по названию или описанию...",
+         // ... (სხვა თარგმანები)
+    }
 };
 
 // =================================================================
@@ -71,16 +88,27 @@ async function uploadImageToFirebase(file) {
 
     try {
         const uniqueName = Date.now() + '-' + file.name;
-        const storageRef = storage.ref('post_images/' + uniqueName);
+        // ფაილის ტიპის დამატება უსაფრთხოებისთვის
+        const storageRef = storage.ref(`post_images/${uniqueName}`); 
+        
+        console.log(`Uploading file: ${uniqueName}`);
         
         const uploadTask = storageRef.put(file);
+        
+        // ლოდინი ატვირთვის დასრულებამდე
         await uploadTask; 
         
         const downloadURL = await storageRef.getDownloadURL();
+        console.log(`Upload complete. URL: ${downloadURL}`);
         return downloadURL;
     } catch (error) {
-        console.error("Error uploading image:", error);
-        alert("შეცდომა: სურათი ვერ აიტვირთა სერვერზე. იხილეთ კონსოლი.");
+        console.error("FIREBASE STORAGE ERROR:", error);
+        
+        if (error.code === 'storage/unauthorized') {
+            alert("შეცდომა: ატვირთვის ნებართვა არ არის. გთხოვთ, შეამოწმოთ **Firebase Storage Rules** და დააყენოთ 'allow read, write: if true;'");
+        } else {
+            alert(`შეცდომა: სურათი ვერ აიტვირთა სერვერზე. იხილეთ კონსოლი: ${error.message}`);
+        }
         return null;
     }
 }
@@ -121,7 +149,6 @@ async function deletePost(postId, imageUrls) {
  */
 async function loadPosts() {
     try {
-        // შეცდომის შემთხვევაში, Firestore Rules-ის შემოწმებაა საჭირო
         const snapshot = await db.collection("listings").orderBy('timestamp', 'desc').get();
         postsData = snapshot.docs.map(doc => ({
             id: doc.id,
@@ -131,7 +158,12 @@ async function loadPosts() {
         displayPosts(postsData.filter(p => currentFilter === 'all' || p.category === currentFilter));
     } catch (error) {
         console.error("Error loading posts from Firestore:", error);
-        document.getElementById('postsContainer').innerHTML = `<div class="empty-state"><h3>შეცდომა მონაცემების ჩატვირთვისას</h3><p>კავშირი დაფიქსირებულია, ახლა სავარაუდოდ, Firestore-ის წესებში (Rules) გჭირდებათ ცვლილების შეტანა, რათა დაუშვათ მონაცემთა წაკითხვა.</p></div>`;
+        let errorMessage = "კავშირი გამართულია. პრობლემა Firestore-ის წესებშია.";
+        if (error.code === 'permission-denied') {
+             errorMessage = "შეცდომა: მონაცემთა წაკითხვის ნებართვა არ არის. გთხოვთ, შეამოწმოთ **Firestore Rules** და დააყენოთ 'allow read: if true;'";
+        }
+        document.getElementById('postsContainer').innerHTML = `<div class="empty-state"><h3>შეცდომა მონაცემების ჩატვირთვისას</h3><p>${errorMessage}</p></div>`;
+        document.getElementById('filterCount').textContent = 0;
     }
 }
 
@@ -190,10 +222,42 @@ function getFormData() {
             address: document.getElementById('houseAddress').value,
             bedrooms: document.getElementById('houseBedrooms').value,
             floor: document.getElementById('houseFloor').value,
-            // ... სხვა ველები
+            bathrooms: document.getElementById('houseBathrooms').value,
+            type: document.getElementById('houseType').value,
+            parking: document.getElementById('houseParking').value,
+            balcony: document.getElementById('houseBalcony').value,
+        };
+    } else if (category === 'land') {
+         commonData.specs = {
+            area: document.getElementById('landArea').value + ' მ²',
+            hectare: document.getElementById('landHectare').value + ' ჰა',
+            purpose: document.getElementById('landPurpose').value,
+            water: document.getElementById('landWater').value,
+            electricity: document.getElementById('landElectricity').value,
+            road: document.getElementById('landRoad').value,
+            landscape: document.getElementById('landLandscape').value,
+            location: document.getElementById('landLocation').value,
+        };
+    } else if (category === 'office') {
+        commonData.specs = {
+            area: document.getElementById('officeArea').value + ' მ²',
+            floor: document.getElementById('officeFloor').value,
+            rooms: document.getElementById('officeRooms').value,
+            bathrooms: document.getElementById('officeBathrooms').value,
+            parking: document.getElementById('officeParking').value,
+            ac: document.getElementById('officeAC').value,
+            internet: document.getElementById('officeInternet').value,
+            security: document.getElementById('officeSecurity').value,
+            address: document.getElementById('officeAddress').value,
         };
     }
-    // ... დაამატეთ სხვა კატეგორიები
+    
+    // ყველა ცარიელი სპეცია ამოვიღოთ
+    for (const key in commonData.specs) {
+        if (!commonData.specs[key] || commonData.specs[key].trim() === '') {
+            delete commonData.specs[key];
+        }
+    }
     
     return commonData;
 }
@@ -203,7 +267,6 @@ function getFormData() {
  */
 async function addPost(event) {
     event.preventDefault();
-    const isEditing = !!currentPostIdToEdit;
     
     const postData = getFormData();
     
@@ -214,35 +277,46 @@ async function addPost(event) {
 
     // 2. სურათების ატვირთვა Storage-ში
     let imageUrls = [];
-    for (const file of selectedImageFiles) {
-        const url = await uploadImageToFirebase(file);
-        if (url) imageUrls.push(url);
-    }
+    let uploadFailed = false;
     
-    if (imageUrls.length === 0) {
-        alert("სურათების ატვირთვა ვერ მოხერხდა. პოსტი არ შენახულა.");
-        return;
-    }
-
-    postData.images = imageUrls;
-    postData.imageUrl = imageUrls[0]; 
+    // დროებით გამორთეთ ღილაკი, რათა არ მოხდეს ორმაგი დაჭერა
+    const saveBtn = document.querySelector('#postForm button[type="submit"]');
+    saveBtn.disabled = true;
+    saveBtn.textContent = '...ატვირთვა'; 
 
     try {
-        if (isEditing) {
-            // რედაქტირება
-            // await db.collection("listings").doc(currentPostIdToEdit).update(postData);
-            alert("რედაქტირება არ არის იმპლემენტირებული.");
-        } else {
-            // ახალი პოსტის დამატება
-            await db.collection("listings").add(postData);
-            alert("განცხადება წარმატებით დაემატა!");
+        for (const file of selectedImageFiles) {
+            const url = await uploadImageToFirebase(file);
+            if (url) {
+                imageUrls.push(url);
+            } else {
+                uploadFailed = true;
+                break; // შეჩერება, თუ ერთი ფაილი ვერ აიტვირთა
+            }
         }
+        
+        if (uploadFailed || imageUrls.length === 0) {
+             alert("სურათების ატვირთვა ვერ მოხერხდა. პოსტი არ შენახულა. იხილეთ კონსოლი Firebase Storage-ის შეცდომისთვის.");
+             return;
+        }
+
+        postData.images = imageUrls;
+        postData.imageUrl = imageUrls[0]; 
+
+        // 3. მონაცემების ჩაწერა Firestore-ში
+        await db.collection("listings").add(postData);
+        alert("განცხადება წარმატებით დაემატა!");
         
         closeModal('postModal');
         loadPosts(); 
+        
     } catch (error) {
         console.error("Firestore Save Error:", error);
-        alert("მონაცემთა შენახვა ვერ მოხერხდა. იხილეთ კონსოლი.");
+        alert(`მონაცემთა შენახვა ვერ მოხერხდა. შეცდომა: ${error.message}.`);
+        
+    } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = translations[currentLang].save; 
     }
 }
 
@@ -322,16 +396,19 @@ function formatPrice(price, currency) {
     let displayPrice = price;
     let symbol = currency === 'GEL' ? '₾' : '$';
 
+    // ლოკალური ვალუტის კონვერტაცია (2.7 იმიტირებული კურსია)
+    const exchangeRate = 2.7; 
+    
     if (currentCurrency === 'USD') {
         if (currency === 'GEL') {
-            displayPrice = price / 2.7; // იმიტირებული კურსი
+            displayPrice = price / exchangeRate; 
             symbol = '$';
         } else {
             symbol = '$';
         }
     } else { // GEL
         if (currency === 'USD') {
-            displayPrice = price * 2.7; // იმიტირებული კურსი
+            displayPrice = price * exchangeRate; 
             symbol = '₾';
         } else {
             symbol = '₾';
@@ -580,7 +657,10 @@ function updateSelectedImagesDisplay() {
                 <img src="${e.target.result}" alt="Selected Image">
                 <button type="button" onclick="removeImage(${index})">&times;</button>
             `;
-            container.appendChild(item);
+            // ვამატებთ ელემენტს, როდესაც სურათის წაკითხვა დასრულდება
+            if (container.children.length < selectedImageFiles.length) {
+                container.appendChild(item);
+            }
         };
         reader.readAsDataURL(file);
     });
