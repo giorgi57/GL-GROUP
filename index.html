@@ -17,12 +17,12 @@
             </div>
             
             <nav class="desktop-nav">
-                <a href="#" class="nav-link active" onclick="filterCategory('all')" data-category="all">ყველა</a>
-                <a href="#" class="nav-link" onclick="filterCategory('cars')" data-category="cars">🚗 ავტომობილები</a>
-                <a href="#" class="nav-link" onclick="filterCategory('houses')" data-category="houses">🏡 სახლები</a>
-                <a href="#" class="nav-link" onclick="filterCategory('land')" data-category="land">🌾 მიწის ნაკვეთები</a>
-                <a href="#" class="nav-link" onclick="filterCategory('office')" data-category="office">🏢 საოფისე</a>
-            </nav>
+    <a href="#" class="nav-link active" onclick="filterCategory('all')" data-category="all" data-translate="all">ყველა</a>
+    <a href="#" class="nav-link" onclick="filterCategory('cars')" data-category="cars" data-translate="carsNav">🚗 ავტომობილები</a>
+    <a href="#" class="nav-link" onclick="filterCategory('houses')" data-category="houses" data-translate="housesNav">🏡 სახლები</a>
+    <a href="#" class="nav-link" onclick="filterCategory('land')" data-category="land" data-translate="landNav">🌾 მიწის ნაკვეთები</a>
+    <a href="#" class="nav-link" onclick="filterCategory('office')" data-category="office" data-translate="officeNav">🏢 საოფისე</a>
+</nav>
 
             <div class="header-tools">
                 <button class="tool-btn" id="currencyToggle" onclick="toggleCurrency()">
@@ -58,37 +58,68 @@
         </div>
         
         <nav class="mobile-nav" id="navMenu">
-            <a href="#" class="nav-link active" onclick="filterCategory('all'); toggleMobileMenu();" data-category="all">ყველა</a>
-            <a href="#" class="nav-link" onclick="filterCategory('cars'); toggleMobileMenu();" data-category="cars">🚗 ავტომობილები</a>
-            <a href="#" class="nav-link" onclick="filterCategory('houses'); toggleMobileMenu();" data-category="houses">🏡 სახლები</a>
-            <a href="#" class="nav-link" onclick="filterCategory('land'); toggleMobileMenu();" data-category="land">🌾 მიწის ნაკვეთები</a>
-            <a href="#" class="nav-link" onclick="filterCategory('office'); toggleMobileMenu();" data-category="office">🏢 საოფისე</a>
-        </nav>
+    <a href="#" class="nav-link active" onclick="filterCategory('all'); toggleMobileMenu();" data-category="all" data-translate="navAll">ყველა</a>
+    <a href="#" class="nav-link" onclick="filterCategory('cars'); toggleMobileMenu();" data-category="cars" data-translate="navCars">🚗 ავტომობილები</a>
+    <a href="#" class="nav-link" onclick="filterCategory('houses'); toggleMobileMenu();" data-category="houses" data-translate="navHouses">🏡 სახლები</a>
+    <a href="#" class="nav-link" onclick="filterCategory('land'); toggleMobileMenu();" data-category="land" data-translate="navLand">🌾 მიწის ნაკვეთები</a>
+    <a href="#" class="nav-link" onclick="filterCategory('office'); toggleMobileMenu();" data-category="office" data-translate="navOffice">🏢 საოფისე</a>
+</nav>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1 data-translate="heroTitle">იპოვე შენი სამომავლო ქონება</h1>
-            <p data-translate="heroSubtitle">ავტომობილები, სახლები, მიწის ნაკვეთები და საოფისე ფართები</p>
-        </div>
-    </section>
-    
-    <section class="search-bar">
-        <div class="container">
-            <input type="text" id="searchInput" oninput="liveSearch()" 
-                   placeholder="მოძებნეთ სათაურით ან აღწერით..." data-translate="searchPlaceholder">
-            <button onclick="liveSearch()" class="btn-primary" data-translate="search">🔍 ძიება</button>
-        </div>
-    </section>
-    <main class="container">
-        <section class="filter-info" id="filterInfo">
-            <h2 data-translate="allAds">🌟 ყველა განცხადება</h2>
-            <p><span id="filterCount">0</span> განცხადება</p>
-        </section>
+   <section class="hero">
 
-        <section class="posts-grid" id="postsContainer">
+    <video autoplay muted loop playsinline class="hero-video">
+
+        <source src="images/688ca287-dd62-4119-bae7-eef278251671.MP4" type="video/mp4">
+    </video>    
+    <div class="container hero-content">
+
+      
+    </div>
+
+</section>
+    
+  <main class="container">
+    <div class="ads-wrapper">
+        
+        <aside class="sidebar-ad left-side">
+            <div class="ad-box">
+                <a href="https://dash.infinityfree.com/accounts" target="_blank">
+                    <img src="images/logo.jpg" alt="რეკლამა 1">
+                </a>
+            </div>
+            <div class="ad-box">
+                <a href="#" target="_blank">
+                    <img src="images/logo.jpg" alt="რეკლამა 2">
+                </a>
+            </div>
+        </aside>
+
+        <div class="main-listings-area">
+            <section class="filter-info" id="filterInfo">
+                <h2 data-translate="allAds">🌟 ყველა განცხადება</h2>
+                <p><span id="filterCount">0</span> განცხადება</p>
             </section>
-    </main>
+
+            <section class="posts-grid" id="postsContainer">
+                </section>
+        </div>
+
+        <aside class="sidebar-ad right-side">
+            <div class="ad-box">
+                <a href="#" target="_blank">
+                    <img src="images/logo.jpg" alt="რეკლამა 3">
+                </a>
+            </div>
+            <div class="ad-box">
+                <a href="#" target="_blank">
+                    <img src="images/logo.jpg" alt="რეკლამა 4">
+                </a>
+            </div>
+        </aside>
+
+    </div> 
+            </main>
 
     <footer>
         <div class="container footer-grid">
@@ -148,6 +179,7 @@
                 <div class="form-group">
                     <label for="postCategory" data-translate="category">კატეგორია:</label>
                     <select id="postCategory" onchange="updateFormFields()">
+                        <option value="advertisement">📢 რეკლამა</option>
                         <option value="cars" data-translate="cars">🚗 ავტომობილები</option>
                         <option value="houses" data-translate="houses">🏡 სახლები</option>
                         <option value="land" data-translate="land">🌾 მიწის ნაკვეთები</option>
@@ -204,6 +236,7 @@
                         <div class="form-grid">
                             <input type="number" id="landArea" placeholder="ფართი (მ²)">
                             <input type="number" id="landHectare" placeholder="ჰექტარი">
+                            <input type="text" id="landLocation" placeholder="ადგილმდებარეობა">
                             <select id="landPurpose"><option value="">დანიშნულება</option><option>სასოფლო-სამეურნეო</option><option>არასასოფლო</option></select>
                             <select id="landWater"><option value="კი">წყალი</option><option>კი</option><option>არა</option></select>
                             <select id="landElectricity"><option value="კი">ელექტროობა</option><option>კი</option><option>არა</option></select>
@@ -339,4 +372,4 @@
     
     <script src="js/script.js"></script>
 </body>
-</html>
+</html> 

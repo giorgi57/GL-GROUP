@@ -101,18 +101,15 @@ header {
 }
 
 .logo img {
-    height: 90px; /* Adjust height as needed */
+    height: 90px;
     border-radius: 10px;
     width: auto;
     display: block;
 }
-
-
+ 
 .logo:hover {
     opacity: 0.8;
 }
-/* END UPDATED LOGO */
-
 
 .desktop-nav {
     flex-grow: 1.5; 
@@ -168,6 +165,7 @@ header {
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
 }
+
 #currencyToggle:hover {
     background-color: rgba(0, 123, 255, 0.1);
 }
@@ -220,7 +218,7 @@ header {
     background-color: rgba(0, 123, 255, 0.1);
 }
 
-/* MOBILE NAV (Hidden on desktop) */
+/* MOBILE NAV */
 .mobile-nav {
     display: none;
     flex-direction: column;
@@ -245,10 +243,29 @@ header {
 
 /* HERO SECTION */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1920x400.png?text=HERO+BACKGROUND') center/cover no-repeat;
-    color: white;
-    padding: 80px 0;
+    position: relative;
+    width: 100%;
+    height: 380px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-vid {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; 
+    z-index: 1;
+}
+
+.hero-content {
+    position: absolute;
+    z-index: 2;
+    color: #fff;
     text-align: center;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.7);
 }
 
 .hero h1 {
@@ -260,7 +277,7 @@ header {
     font-size: 1.2rem;
 }
 
-/* --- SEARCH BAR STYLES --- */
+/* SEARCH BAR */
 .search-bar {
     padding: 20px 0;
     background-color: var(--card-bg);
@@ -274,29 +291,7 @@ header {
     gap: 10px;
     align-items: center;
 }
-
-#searchInput {
-    flex-grow: 1;
-    padding: 12px 15px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: var(--input-bg);
-    color: var(--text-color);
-    transition: border-color 0.2s;
-}
-
-#searchInput:focus {
-    border-color: var(--primary-color);
-    outline: none;
-}
-
-.search-bar button {
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-}
+ 
 
 /* FILTER INFO */
 .filter-info {
@@ -317,10 +312,75 @@ header {
     color: var(--secondary-color);
 }
 
-/* POSTS GRID */
+/* ADS WRAPPER - დესკტოპის განლაგება */
+.ads-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+/* რეკლამის მარცხენა სვეტი */
+.sidebar-ad.left-side {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+    width: 280px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 120px;
+}
+
+/* შუა ნაწილი */
+.main-listings-area {
+    flex: 1;
+    min-width: 0px;
+    max-width: 1100px;
+}
+
+/* რეკლამის მარჯვენა სვეტი */
+.sidebar-ad.right-side {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+    width: 280px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 120px;
+}
+
+/* რეკლამის ყუთი */
+.ad-box {
+    width: 280px;
+    height: 280px;
+    background: #f4f4f4;
+    border: 1px dashed #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+}
+
+.ad-box:hover {
+    transform: scale(1.02);
+}
+
+.ad-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* POSTS GRID - 3 განცხადება გვერდიგვერდ */
 .posts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     padding-bottom: 50px;
 }
@@ -338,14 +398,14 @@ header {
 
 .post-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 16px rgba(197, 187, 187, 0.15);
 }
 
 /* Image Slider */
 .post-image-slider {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 280px;
     overflow: hidden;
     cursor: pointer;
 }
@@ -514,7 +574,7 @@ header {
     color: var(--secondary-color);
 }
 
-/* --- FOOTER STYLES --- */
+/* FOOTER */
 footer {
     background-color: var(--footer-bg);
     color: var(--footer-text);
@@ -588,9 +648,7 @@ footer {
     background-color: white; 
 }
 
-
-/* --- MODAL STYLES --- */
-
+/* MODAL STYLES */
 .modal {
     display: none;
     position: fixed;
@@ -727,7 +785,7 @@ footer {
     background-color: #5a6268;
 }
 
-/* Selected Images Container */
+/* Selected Images */
 .selected-images-container {
     display: flex;
     flex-wrap: wrap;
@@ -773,8 +831,7 @@ footer {
     margin-bottom: 5px;
 }
 
-
-/* --- DETAIL MODAL STYLES --- */
+/* DETAIL MODAL */
 .detail-content {
     max-width: 1000px;
     margin: 5% auto;
@@ -791,8 +848,7 @@ footer {
 .detail-info {
     flex: 1.5;
     padding-top: 5px;
-    /* --- შესწორება 1: Flexbox-ის შეკუმშვისთვის --- */
-    min-width: 0; 
+    min-width: 0px; 
 }
 
 .main-image-container {
@@ -907,8 +963,7 @@ footer {
 .btn-contact:hover, .btn-share:hover {
     background-color: var(--primary-hover);
 }
-
-/* --- შესწორება 2: მთლიან სექციას ვუმალავთ გადინებას --- */
+  
 .detail-section {
     overflow: hidden; 
 }
@@ -924,7 +979,6 @@ footer {
 .detail-section p {
     color: var(--text-color);
     white-space: pre-wrap; 
-    /* --- შესწორება 3: გრძელი სიტყვების გაყოფა --- */
     word-wrap: break-word; 
     overflow-wrap: break-word;
 }
@@ -970,8 +1024,7 @@ footer {
     border-top: 1px solid var(--border-color);
 }
 
-
-/* --- FULLSCREEN GALLERY MODAL --- */
+/* FULLSCREEN GALLERY */
 .fullscreen-gallery-modal {
     background-color: rgba(0, 0, 0, 0.95);
 }
@@ -1044,4 +1097,227 @@ footer {
     background: rgba(0, 0, 0, 0.6);
     padding: 5px 15px;
     border-radius: 6px;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* დესკტოპიდან ტაბლეტზე გადასვლა */
+@media (max-width: 1250px) {
+    .ads-wrapper {
+        gap: 16px;
+        max-width: 100%;
+        padding: 0 16px;
+    }
+
+    .sidebar-ad.left-side,
+    .sidebar-ad.right-side {
+        width: 240px;
+    }
+
+    .post-image-slider {
+        height: 240px;
+    }
+
+    .gallery-nav-btn.prev { left: -50px; }
+    .gallery-nav-btn.next { right: -50px; }
+}
+
+/* ტაბლეტი */
+@media (max-width: 992px) {
+    .header-content {
+        padding: 12px 0;
+    }
+
+    .logo img {
+        height: 70px;
+    }
+
+    .desktop-nav {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: inline-block;
+    }
+
+    .ads-wrapper {
+        gap: 16px;
+    }
+
+    .sidebar-ad.left-side,
+    .sidebar-ad.right-side {
+        display: none;
+    }
+
+    .posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .detail-content {
+        flex-direction: column;
+        max-width: 95%;
+    }
+
+    .detail-gallery {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .main-image-container {
+        height: 300px;
+    }
+
+    .gallery-nav-btn.prev { left: 10px; }
+    .gallery-nav-btn.next { right: 10px; }
+}
+
+/* პატარა მობილური */
+@media (max-width: 768px) {
+    .header-tools {
+        gap: 6px;
+    }
+
+    .tool-btn {
+        padding: 7px 8px;
+        font-size: 0.8rem;
+    }
+
+    .hero {
+        height: 300px;
+    }
+
+    .posts-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .post-image-slider {
+        height: 220px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-section ul {
+        text-align: left;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .detail-price-box .price {
+        font-size: 1.6rem;
+    }
+
+    .main-image-container {
+        height: 240px;
+    }
+}
+
+/* Extra Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .header-content {
+        padding: 10px 10px;
+    }
+
+    .tool-btn {
+        padding: 6px 8px;
+        font-size: 0.8rem;
+    }
+
+    .logo img {
+        height: 30px;
+    }
+
+    /* Price Input Group mobile fix */
+    .price-input-group {
+        flex-direction: column;
+    }
+
+    .price-input-group select {
+        width: 100%;
+    }
+
+    .main-image-container {
+        height: 200px;
+    }
+
+    .gallery-counter {
+        font-size: 1rem;
+    }
+}
+
+/* ============================================================
+   საბოლოო გასწორება: რეკლამები კიდეებში და დიდი კვადრატები
+   ============================================================ */
+
+/* 1. ძირითადი კონტეინერის გაფართოება (რომ დიდი პოსტები დაეტიოს) */
+main.container {
+    max-width: 98% !important;
+    width: 98% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+}
+
+/* 2. რეკლამების გაწევა ეკრანის კიდეებში */
+.ads-wrapper {
+    display: flex !important;
+    justify-content: space-between !important; 
+    gap: 10px !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+}
+
+/* 3. გვერდითა რეკლამების სიგანე */
+.sidebar-ad {
+    width: 300px !important; 
+    flex-shrink: 0 !important;
+}
+
+/* 4. შუა ნაწილის (განცხადებების) გაფართოება */
+.main-listings-area {
+    flex: 1 !important;
+    max-width: 1400px !important; /* აქედან კონტროლდება პოსტების ზომა */
+    margin: 0 auto !important;
+}
+
+/* 5. 3 სვეტიანი ბადე */
+.posts-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 30px !important;
+}
+
+/* 6. განცხადების გახდომა კვადრატული */
+.post-image-slider {
+    width: 80% !important;
+    aspect-ratio: 1 / 1 !important; /* სიმაღლეს აიგივებს სიგანესთან */
+    height: auto !important; 
+    border-bottom: 1px solid var(--border-color);
+}
+
+.slider-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* სურათი ჩაჯდება ლამაზად */
+}
+
+/* პოსტის შიგთავსის გადიდება */
+.post-content {
+    padding: 20px !important;
+}
+
+.post-price {
+    font-size: 1.6rem !important;
+}
+
+/* მობილურისთვის გასწორება */
+@media (max-width: 1200px) {
+    .sidebar-ad { display: none !important; }
+    .posts-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+@media (max-width: 768px) {
+    .posts-grid { grid-template-columns: 1fr !important; }
 }
