@@ -27,9 +27,9 @@ const translations = {
     'ka': {
         allAds: "🌟 ყველა განცხადება",
         cars: "🚗 ავტომობილები",
-        houses: "🏡 სახლები",
+        houses: "🏡 სახლები/ბინები",
         land: "🌾 მიწის ნაკვეთები",
-        office: "🏢 კომერციული ფართი",
+        office: "🏢 კომერციული ფართები",
         searchPlaceholder: "მოძებნეთ სათაურით ან აღწერით...",
         search: "🔍 ძიება",
         authorization: "ავტორიზაცია",
