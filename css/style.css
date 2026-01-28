@@ -357,8 +357,8 @@ header {
 .ad-box {
     width: 280px;
     height: 280px;
-    background: #f4f4f4;
-    border: 1px dashed #ddd;
+    background: #000000;
+    border: 1px dashed #000000;
     border-radius: 12px;
     overflow: hidden;
     display: flex;
