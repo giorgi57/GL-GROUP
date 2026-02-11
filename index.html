@@ -23,6 +23,7 @@
     <a href="#" class="nav-link" onclick="filterCategory('houses')" data-category="houses" data-translate="housesNav">🏡 სახლები/ბინები</a>
     <a href="#" class="nav-link" onclick="filterCategory('land')" data-category="land" data-translate="landNav">🌾 მიწის ნაკვეთები</a>
     <a href="#" class="nav-link" onclick="filterCategory('office')" data-category="office" data-translate="officeNav">🏢 კომერციული ფართები</a>
+    <a href="#" class="nav-link" onclick="filterCategory('rent')" data-category="rent" data-translate="rentNav">🔑 ქირავდება</a>
 </nav>
 
             <div class="header-tools">
@@ -64,6 +65,7 @@
     <a href="#" class="nav-link" onclick="filterCategory('houses'); toggleMobileMenu();" data-category="houses" data-translate="navHouses">🏡 სახლები/ბინები</a>
     <a href="#" class="nav-link" onclick="filterCategory('land'); toggleMobileMenu();" data-category="land" data-translate="navLand">🌾 მიწის ნაკვეთები</a>
     <a href="#" class="nav-link" onclick="filterCategory('office'); toggleMobileMenu();" data-category="office" data-translate="navOffice">🏢 კომერციული ფართები</a>
+    <a href="#" class="nav-link" onclick="filterCategory('rent'); toggleMobileMenu();" data-category="rent" data-translate="navRent">🔑 ქირავდება</a>
 </nav>
     </header>
 
@@ -191,6 +193,7 @@
                         <option value="houses" data-translate="houses">🏡 სახლები/ბინები</option>
                         <option value="land" data-translate="land">🌾 მიწის ნაკვეთები</option>
                         <option value="office" data-translate="office">🏢 კომერციული ფართები</option>
+                        <option value="rent" data-translate="rent">🔑 ქირავდება</option>
                     </select>
                 </div>
                 
@@ -264,6 +267,35 @@
                             <select id="officeInternet"><option value="კი">ინტერნეტი</option><option>კი</option><option>არა</option></select>
                             <select id="officeSecurity"><option value="კი">უსაფრთხოება</option><option>კი</option><option>არა</option></select>
                             <input type="text" id="officeAddress" placeholder="მისამართი" style="grid-column: 1 / -1;">
+                        </div>
+                    </div>
+
+                    <div id="rentFields" class="category-fields" style="display: none;">
+                        <div class="form-grid">
+                            <select id="rentType">
+                                <option value="">ტიპი</option>
+                                <option>ბინა</option>
+                                <option>სახლი</option>
+                                <option>ოფისი</option>
+                                <option>ავტომობილი</option>
+                                <option>სხვა</option>
+                            </select>
+                            <input type="number" id="rentRooms" placeholder="ოთახები">
+                            <input type="number" id="rentArea" placeholder="ფართი (მ²)">
+                            <input type="number" id="rentFloor" placeholder="სართული">
+                            <select id="rentPeriod">
+                                <option value="">პერიოდი</option>
+                                <option>დღიური</option>
+                                <option>ყოველთვიური</option>
+                                <option>წლიური</option>
+                            </select>
+                            <select id="rentFurnished">
+                                <option value="">ავეჯი</option>
+                                <option>ავეჯით</option>
+                                <option>ავეჯის გარეშე</option>
+                            </select>
+                            <select id="rentParking"><option value="">პარკინგი</option><option>კი</option><option>არა</option></select>
+                            <input type="text" id="rentAddress" placeholder="მისამართი" style="grid-column: 1 / -1;">
                         </div>
                     </div>
 
@@ -392,4 +424,4 @@
     <script async src="//counter.top.ge/counter.js"></script>
     
 </body>
-</html> 
+</html>
