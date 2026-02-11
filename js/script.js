@@ -30,6 +30,18 @@ const translations = {
         houses: "🏡 სახლები/ბინები",
         land: "🌾 მიწის ნაკვეთები",
         office: "🏢 კომერციული ფართები",
+        rent: "🔑 ქირავდება",
+        carsNav: "🚗 ავტომობილები",
+        housesNav: "🏡 სახლები/ბინები",
+        landNav: "🌾 მიწის ნაკვეთები",
+        officeNav: "🏢 კომერციული ფართები",
+        rentNav: "🔑 ქირავდება",
+        navAll: "ყველა",
+        navCars: "🚗 ავტომობილები",
+        navHouses: "🏡 სახლები/ბინები",
+        navLand: "🌾 მიწის ნაკვეთები",
+        navOffice: "🏢 კომერციული ფართები",
+        navRent: "🔑 ქირავდება",
         searchPlaceholder: "მოძებნეთ სათაურით ან აღწერით...",
         search: "🔍 ძიება",
         authorization: "ავტორიზაცია",
@@ -62,6 +74,12 @@ const translations = {
          houses: "🏡 Houses",
          land: "🌾 Land Plots",
          office: "🏢 Office Spaces",
+         rent: "🔑 rent",
+         carsNav: "🚗 Cars",
+         housesNav: "🏡 Houses",
+         landNav: "🌾 Land",
+         officeNav: "🏢 Offices",
+         rentNav: "🔑 Rent",
          searchPlaceholder: "Search by title or description...",
          // ... (სხვა თარგმანები)
     },
@@ -71,6 +89,12 @@ const translations = {
          houses: "🏡 Дома",
          land: "🌾 Земельные участки",
          office: "🏢 Офисы",
+         rent: "🔑 Аренда",
+         carsNav: "🚗 Автомобили",
+         housesNav: "🏡 Дома",
+         landNav: "🌾 Земля",
+         officeNav: "🏢 Офисы",
+         rentNav: "🔑 Аренда",
          searchPlaceholder: "Искать по названию или описанию...",
          // ... (სხვა თარგმანები)
     }
@@ -252,6 +276,17 @@ function getFormData() {
             security: document.getElementById('officeSecurity').value,
             address: document.getElementById('officeAddress').value,
         };
+    } else if (category === 'rent') {
+        commonData.specs = {
+            type: document.getElementById('rentType').value,
+            rooms: document.getElementById('rentRooms').value,
+            area: document.getElementById('rentArea').value + ' მ²',
+            floor: document.getElementById('rentFloor').value,
+            period: document.getElementById('rentPeriod').value,
+            furnished: document.getElementById('rentFurnished').value,
+            parking: document.getElementById('rentParking').value,
+            address: document.getElementById('rentAddress').value,
+        };
     }
     
     // ყველა ცარიელი სპეცია ამოვიღოთ
@@ -362,8 +397,6 @@ function displayPosts(posts) {
 
     document.getElementById('filterCount').textContent = posts.length;
 }
-
-// ... (დანარჩენი UI და დამხმარე ფუნქციები) ...
 
 function filterCategory(category) {
     currentFilter = category;
